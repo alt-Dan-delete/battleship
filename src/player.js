@@ -18,18 +18,25 @@ function Player(name) {
     return enemyBoard.receiveAttack(x, y);
   }
 
-  function placeOnBoard(lenght) {
+  function placeOnBoard(shipConfig) {
     let placement = false;
     while (!placement) {
       let x = Math.floor(Math.random() * 10);
       let y = Math.floor(Math.random() * 10);
       let orientation = Math.floor(Math.random() * 2) > 0 ? 'horizontal' : 'vertical';
-      placement = board.placeShip(Ship(lenght), x, y, orientation)
+      const newShip = Ship(shipConfig.length, shipConfig.name);
+      placement = board.placeShip(newShip, x, y, orientation)
     }
   }
 
   function placeFleet() {
-    const fleet = [5, 4, 3, 2, 1];
+    const fleet = [
+      { length: 5, name: 'carrier' },
+      { length: 4, name: 'battleship' },
+      { length: 3, name: 'destroyer' },
+      { length: 2, name: 'submarine' },
+      { length: 1, name: 'patrol-boat' }
+    ];
     fleet.forEach(element => {
       placeOnBoard(element)
     });    

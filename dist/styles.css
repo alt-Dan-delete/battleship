@@ -3,26 +3,48 @@ body {
   text-align: center;
   background-color: black;
   color: white;
+  background-color: #1e1e2e;
 }
 
-#app {
-  margin-top: 20px;
+#boards {
+  display: flex;
+  width: 100%;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
 }
 
 #player-board, #computer-board {
   display: grid;
-  grid-template-columns: repeat(10, 30px);
-  grid-template-rows: repeat(10, 30px);
-  gap: 1px;
-  border: 2px solid #333;
-  background-color: #333
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(10, 40px);
+  gap: 2px;
+  /* border: 2px solid #333; */
+  /* background-color:  */
 }
 
 .square {
-  width: 30px;
-  height: 30px;
-  background-color: lightblue;
-  border: 1px solid white;
+  width: 40px;
+  height: 40px;
+  background-color: #232634;
+  border-radius: 5px;
+  /* border: 1px solid white; */
+}
+
+.carrier {
+  background-color: pink
+}
+.battleship {
+  background-color: blueviolet;
+}
+.destroyer {
+  background-color: yellow;
+}
+.submarine {
+  background-color: greenyellow;
+}
+.patrol-boat {
+  background-color: orange;
 }
 
 .square.miss {
@@ -31,8 +53,4 @@ body {
 
 .square.hit {
   background-color: #ff4d4d; /* Red for hits */
-}
-
-.square.ship {
-  background-color: #4dff88; /* Green to see your own ships */
 }

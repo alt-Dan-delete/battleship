@@ -1,4 +1,4 @@
-function Ship(length) {
+function Ship(length, name) {
   let hits = 0;
 
   return {
@@ -11,9 +11,12 @@ function Ship(length) {
     getLength() {
       return length;
     },
+    getName() {
+      return name;
+    },
     getHits() {
       return hits;
-    }
+    }    
   };
 }
 

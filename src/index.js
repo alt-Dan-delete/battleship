@@ -1,19 +1,41 @@
 const Player = require("./player");
 const Ship = require("./ship");
+const UI = require("./ui")
+
+let isGameOver = false;
+let canPlayerMove = false;
 
 const user = Player("Human");
 const computer = Player("AI");
 
-let isGameOver = false;
-let canPlayerMove = true;
-
 user.placeFleet();
 computer.placeFleet();
 
-// console.log(computer.board.placedShips().length)
+UI.randomBtn.addEventListener('click', () => {
+    user.board.clearGrid();
+    computer.board.clearGrid();
+    isGameOver = false;
+    canPlayerMove = false;
+    const boardContainer = document.getElementById('player-board');
+    const computerBoardUI = document.getElementById('computer-board');
+    user.placeFleet();
+    computer.placeFleet();
+    renderBoard(user, playerBoardUI, false);
+    renderBoard(computer, computerBoardUI, true);
+    UI.message.textContent = 'Press start to play'
+    UI.message.hidden = false;
+})
+
+UI.playBtn.addEventListener('click', () => {
+    canPlayerMove = true;
+    UI.message.hidden = true;
+})
 
 const playerBoardUI = document.getElementById('player-board');
 const computerBoardUI = document.getElementById('computer-board');
+
+renderBoard(user, playerBoardUI, false);
+renderBoard(computer, computerBoardUI, true);
 
 function handleAttack(x, y) {
     // If the game is over or it's the AI's turn, do nothing
@@ -44,12 +66,13 @@ function handleAttack(x, y) {
         }
         
         canPlayerMove = true; // "Open the gate" for the next turn
-    }, 500);
+    }, 0);
 }
+
 
 function renderBoard(boardInstance, containerElement, isEnemy) {
     containerElement.innerHTML = '';
-    const grid = boardInstance.board.grid();
+    let grid = boardInstance.board.grid();
 
     for (let y = 0; y < 10; y++) {
         for (let x = 0; x < 10; x++) {
@@ -62,7 +85,8 @@ function renderBoard(boardInstance, containerElement, isEnemy) {
             } else if (cell === 'hit') {
                 square.classList.add('hit');
             } else if (cell !== null && !isEnemy) {
-                square.classList.add('ship');
+                const shipName = cell.getName();
+                square.classList.add('ship', shipName);
             }
 
             if (isEnemy) {
@@ -73,6 +97,3 @@ function renderBoard(boardInstance, containerElement, isEnemy) {
         }
     }
 }
-
-renderBoard(user, playerBoardUI, false);
-renderBoard(computer, computerBoardUI, true);

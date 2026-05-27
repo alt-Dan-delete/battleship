@@ -1,8 +1,8 @@
 const Ship = require("./ship");
 
 function Gameboard() {
-  const grid = [];
-  const placedShips = [];
+  let grid = [];
+  let placedShips = [];
 
   for (let i = 0; i < 10; i++) {
     const row = [];
@@ -83,6 +83,17 @@ function Gameboard() {
     },
     placedShips() {
       return placedShips;
+    },
+    clearGrid() {
+      grid = [];
+      for (let i = 0; i < 10; i++) {
+        const row = [];
+        for (let k = 0; k < 10; k++) {
+          row.push(null);
+        }
+        grid.push(row);
+      }
+      placedShips = [];
     }
   };
 }

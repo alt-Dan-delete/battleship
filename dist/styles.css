@@ -1,12 +1,22 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background-color: black;
-  color: white;
+  color: #cdd6f4;
   background-color: #1e1e2e;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+header {
+  margin-bottom: 40px;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 20px;
 }
 
 #boards {
+  margin-top: 40px;
   display: flex;
   width: 100%;
   gap: 40px;
@@ -14,43 +24,120 @@ body {
   align-items: center;
 }
 
-#player-board, #computer-board {
+#player-board,
+#computer-board {
   display: grid;
   grid-template-columns: repeat(10, 40px);
   grid-template-rows: repeat(10, 40px);
   gap: 2px;
-  /* border: 2px solid #333; */
-  /* background-color:  */
 }
 
 .square {
-  width: 40px;
-  height: 40px;
-  background-color: #232634;
+  background-color: #27293b;
   border-radius: 5px;
-  /* border: 1px solid white; */
 }
 
-.carrier {
-  background-color: pink
-}
-.battleship {
-  background-color: blueviolet;
-}
-.destroyer {
-  background-color: yellow;
-}
-.submarine {
-  background-color: greenyellow;
-}
-.patrol-boat {
-  background-color: orange;
+.square:hover {
+  background-color: #3b4057;
+  cursor: pointer;
 }
 
 .square.miss {
-  background-color: #f0f0f0; /* Light gray for misses */
+  background-color: #3b4057;
 }
 
 .square.hit {
-  background-color: #ff4d4d; /* Red for hits */
+  background-color: #ff4d4d;
+}
+
+h2 {
+  padding: 20px;
+  background-color: #303446;
+}
+
+button {
+  background-color: #303446;
+  color: #cdd6f4;
+  outline: none;
+  border: none;
+  padding: 15px 20px 15px 20px;
+  margin: 10px;
+  width: 120px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+button:hover {
+  filter: brightness(120%);
+  cursor: pointer;
+}
+
+#carrier,
+#battleship,
+#destroyer,
+#submarine,
+#patrol-boat {
+  margin-top: 20px;
+  margin-left: 45vw;
+  position: relative;
+  padding: 10px;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+#carrier::before,
+#battleship::before,
+#destroyer::before,
+#submarine::before,
+#patrol-boat::before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 5px
+}
+
+#carrier::before {
+  background: #cba6f7;
+}
+
+#battleship::before {
+  background: #89dceb;
+}
+
+#destroyer::before {
+  background-color: #a6e3a1;
+}
+
+#submarine::before {
+  background-color: #fab387;
+}
+
+#patrol-boat::before {
+  background-color: #f9e2af;
+}
+
+.carrier {
+  background-color: #cba6f7
+}
+
+.battleship {
+  background-color: #89dceb;
+}
+
+.destroyer {
+  background-color: #a6e3a1;
+}
+
+.submarine {
+  background-color: #fab387;
+}
+
+.patrol-boat {
+  background-color: #f9e2af;
 }

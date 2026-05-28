@@ -11,13 +11,15 @@ const computer = Player("AI");
 user.placeFleet();
 computer.placeFleet();
 
+
+const playerBoardUI = document.getElementById('player-board');
+const computerBoardUI = document.getElementById('computer-board');
+
 UI.randomBtn.addEventListener('click', () => {
     user.board.clearGrid();
     computer.board.clearGrid();
     isGameOver = false;
     canPlayerMove = false;
-    const boardContainer = document.getElementById('player-board');
-    const computerBoardUI = document.getElementById('computer-board');
     user.placeFleet();
     computer.placeFleet();
     renderBoard(user, playerBoardUI, false);
@@ -31,30 +33,26 @@ UI.playBtn.addEventListener('click', () => {
     UI.message.hidden = true;
 })
 
-const playerBoardUI = document.getElementById('player-board');
-const computerBoardUI = document.getElementById('computer-board');
 
 renderBoard(user, playerBoardUI, false);
 renderBoard(computer, computerBoardUI, true);
 
 function handleAttack(x, y) {
-    // If the game is over or it's the AI's turn, do nothing
     if (isGameOver || !canPlayerMove) return;
 
-    const hit = user.attack(computer.board, x, y);
-    
-    // If the player clicked a square they already hit, don't let the AI move
+    const hit = user.attack(computer.board, x, y);   
     if (!hit) return; 
 
     renderBoard(computer, computerBoardUI, true);
 
     if (computer.board.allSunk()) {
         isGameOver = true;
-        alert("You win!");
+        UI.message.textContent = "You Win! Press random to start a new game!"
+        UI.message.hidden = false;    
         return;
     }
 
-    canPlayerMove = false; // "Close the gate"
+    canPlayerMove = false;
 
     setTimeout(() => {
         computer.computerMove(user.board);
@@ -62,11 +60,12 @@ function handleAttack(x, y) {
 
         if (user.board.allSunk()) {
             isGameOver = true;
-            alert("AI wins!");
+            UI.message.textContent = "You Loose! Press random to start a new game!"
+            UI.message.hidden = false;            
         }
         
-        canPlayerMove = true; // "Open the gate" for the next turn
-    }, 0);
+        canPlayerMove = true;
+    }, 500);
 }
 
 
